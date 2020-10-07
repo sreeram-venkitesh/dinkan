@@ -60,13 +60,6 @@ keystop();
 
 editor.addEventListener('keystopped', ()=>{
     console.log(editor.value)
-    // latex.innerText = editor.value
-    
-    // let generator = new HtmlGenerator({ hyphenate: false })
-
-    // let doc = parse(editor.value, { generator: generator }).htmlDocument()
-    // latex.innerHTML = doc.documentElement.outerHTML
-    // console.log(doc.documentElement.outerHTML)
 
     var generator = new latexjs.HtmlGenerator({ hyphenate: false, stylesAndScripts : "font-size:30px" })
 
@@ -76,4 +69,5 @@ editor.addEventListener('keystopped', ()=>{
     latex.innerHTML = '';
     document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"))
     latex.appendChild(generator.domFragment())
+
 });
