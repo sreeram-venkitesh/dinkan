@@ -20,7 +20,7 @@ app.get('/editor',(req,res)=>{
     res.render('editor')
 })
 
-const PORT = process.env.NODE_ENV || 5000
+const PORT = process.env.PORT || 5000
 
 app.listen(PORT,()=>{
     console.log('Server has started')
