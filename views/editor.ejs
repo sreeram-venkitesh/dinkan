@@ -21,7 +21,7 @@
     />
   </head>
 
-  <body style="margin: 10px; max-height:100%;">
+  <body style="margin: 10px; max-height: 100%">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a
@@ -42,14 +42,32 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item" href="/"> Home </a>
+          <a
+            class="button navbar-item"
+            onclick="insert('section')"
+            style="margin: auto; padding: 10px; font-size:18px;"
+          >
+            Section
+          </a>
 
-          <a class="navbar-item" href="/learn"> Learn </a>
+          <a
+            class="button navbar-item"
+            onclick="insert('listitem')"
+            style="margin: auto; padding: 10px; font-size:18px;"
+          >
+            List Item
+          </a>
 
-          <a class="navbar-item" href="/about"> About </a>
+          <a
+            class="button navbar-item"
+            onclick="insert('eqn')"
+            style="margin: auto; padding: 10px; font-size:18px;"
+          >
+            Equation
+          </a>
         </div>
 
-        <div class="navbar-end">
+        <div class="navbar-end" style="margin-right: 10px;">
           <div class="navbar-item">
             <div class="buttons">
               <a
@@ -92,7 +110,6 @@
             padding: 20px;
             padding-left: 40px;
             font-size: 25px;
-            
           "
         >
 \documentclass{article} 
@@ -120,8 +137,8 @@
           min-height: 87vh;
           margin: 10px;
           max-height: 87vh;
-          overflow-y:scroll;
-          position:relative;
+          overflow-y: scroll;
+          position: relative;
         "
       >
         <latex-js
