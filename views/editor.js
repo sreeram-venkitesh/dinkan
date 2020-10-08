@@ -14,7 +14,7 @@ socket.on('user-connected',(userId)=>{
   })
 
 // document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"))
-latex.innerHTML = '';
+// latex.innerHTML = '';
 document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"))
 latex.appendChild(generator.domFragment())
 
@@ -97,4 +97,23 @@ socket.on('chat message', function(msg){
 
 socket.on('new peer', (number)=>{
     console.log('New person joined, total : ',number)
+})
+
+var shareButton = document.getElementById('shareButton');
+shareButton.onclick = function(){
+    var dummy = document.createElement('input'),
+    text = window.location.href.split('editor/')[1];
+
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
+    shareButton.innerHTML = '<strong>Invite Code Copied!</strong>';
+    setTimeout(() =>shareButton.innerHTML="<strong>Share</strong>",1000);
+}
+
+const downloadButton = document.getElementById('downloadButton')
+downloadButton.addEventListener('click',()=>{
+    console.log('Download clicked')
 })
