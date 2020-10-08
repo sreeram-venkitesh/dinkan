@@ -32,9 +32,9 @@
           <div class="navbar-item">
             <div class="buttons">
               <a
+                id="startButton"
                 class="button is-warning"
                 style="font-size: 25px; padding: 10px; height: fit-content"
-                href="/editor"
               >
                 <strong>Start</strong>
               </a>
@@ -44,9 +44,49 @@
       </div>
     </nav>
 
+    <div class="modal" id="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head" style="text-align: center;">
+          <p class="modal-card-title">Join/Create room!</p>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+          <div style="width:fit-content; padding:10px; margin:0 auto;">
+            <form action="/" method="POST">
+                <button class="button is-warning" type="submit" style="font-size: larger;">Create a room</button>
+            </form>
+          </div><br>
+          <div style="border:1px solid #333; width:fit-content; padding:20px; text-align: center; margin:0 auto;">
+              <form action="/join" method="POST">
+                  <input class="input" type="text" name="code" id="code" style="width: fit-content; font-size:larger;" placeholder="Enter Code"><br><br>
+                  <button class="button is-primary" type="submit" style="font-size: larger;">Join room</button>
+              </form>
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+        </footer>
+      </div>
+      <button id="modalClose" class="modal-close is-large" aria-label="close"></button>
+    </div>
+
     <div style="text-align: center">
       <br /><br />
       <h1 class="subtitle is-1">About</h1>
     </div>
+
+    <script>
+      const startButton = document.getElementById('startButton');
+      const modal = document.getElementById('modal')
+      const modalClose = document.getElementById('modalClose')
+      
+      startButton.addEventListener('click',()=>{
+        modal.className = "modal is-active"
+      })
+
+      modalClose.addEventListener('click',()=>{
+        modal.className = 'modal'
+      });
+    </script>
   </body>
 </html>

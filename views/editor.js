@@ -5,6 +5,14 @@ var generator = new latexjs.HtmlGenerator({ hyphenate: false })
 
 generator = latexjs.parse(editor.value, { generator: generator })
 
+var socket = io('/');
+
+socket.emit('join-room',roomId)
+
+socket.on('user-connected',(userId)=>{
+    console.log('User joined : ',userId)
+  })
+
 // document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"))
 latex.innerHTML = '';
 document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"))
@@ -38,9 +46,7 @@ function insert(command) {
                           break;
         case 'eqn' : insertAtCursor(editor,'\\[ x^n + y^n = z^n \\]')
                           break;
-
     }
-
 }
 
 
@@ -71,3 +77,24 @@ editor.addEventListener('keystopped', ()=>{
     latex.appendChild(generator.domFragment())
 
 });
+
+editor.addEventListener('keyup',()=>{
+    socket.emit('chat message', editor.value, roomId);
+    return false;
+})
+
+socket.on('chat message', function(msg){
+    editor.value = String(msg);
+    var generator = new latexjs.HtmlGenerator({ hyphenate: false, stylesAndScripts : "font-size:30px" })
+
+    generator = latexjs.parse(editor.value, { generator: generator })
+
+    // document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"))
+    latex.innerHTML = '';
+    document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"))
+    latex.appendChild(generator.domFragment())
+});
+
+socket.on('new peer', (number)=>{
+    console.log('New person joined, total : ',number)
+})
