@@ -1,5 +1,6 @@
 const editor = document.getElementById('editor');
 const latex = document.getElementById('latex');
+const messageElement = document.getElementById('messages');
 
 var generator = new latexjs.HtmlGenerator({ hyphenate: false })
 
@@ -81,7 +82,7 @@ editor.addEventListener('keystopped', ()=>{
 editor.addEventListener('keyup',()=>{
     socket.emit('chat message', editor.value, roomId);
     return false;
-})
+});
 
 socket.on('chat message', function(msg){
     editor.value = String(msg);
@@ -98,6 +99,15 @@ socket.on('chat message', function(msg){
 socket.on('new peer', (number)=>{
     console.log('New person joined, total : ',number)
 })
+
+socket.on('new edit', (msg) => {
+    var newLog = document.createElement("LI"); 
+    var textnode = document.createTextNode(msg);
+    newLog.appendChild(textnode);
+    //messageElement.appendChild(newLog);
+    messageElement.insertBefore(newLog, messageElement.childNodes[0]);
+    
+  })
 
 var shareButton = document.getElementById('shareButton');
 shareButton.onclick = function(){
