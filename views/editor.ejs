@@ -16,6 +16,9 @@
         border: 1px solid black;
         margin-right: 2em;
       }
+      #messages li { word-break: break-all; font-size: 1rem; font-weight: bold; color: black; padding-left: 10px; }
+      #messages li:nth-child(odd) {background: #facdcdd3} 
+      #messages li:nth-child(even){background: #b7f3c4e8}
     </style>
     <link rel="stylesheet" href="../bulma.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -76,9 +79,17 @@
           <div class="navbar-item">
             <div class="buttons">
               <a
+                id='logButton'
+                class="button is-warning"
+                style="font-size: 25px; padding: 10px; height: fit-content; font-weight: bold;background-color: rgb(101, 187, 245);"
+                onclick="toggleLog()"
+              >
+                Show Log
+              </a>
+              <a
                 id='shareButton'
                 class="button is-warning"
-                style="font-size: 25px; padding: 10px; height: fit-content"
+                style="font-size: 25px; padding: 10px; height: fit-content; background-color: chartreuse;"
               >
                 <strong>Share</strong>
               </a>
@@ -95,13 +106,13 @@
       </div>
     </nav>
 
-    <div style="display: flex">
+    <div style="display: flex" >
       <div
         style="
           border: 2px solid #000;
           float: left;
           width: 100%;
-          height: 87vh;
+          height: 80vh;
           margin: 10px;
           overflow: hidden;
         "
@@ -141,9 +152,9 @@
           border: 2px solid #000;
           float: right;
           width: 100%;
-          min-height: 87vh;
+          min-height: 80vh;
           margin: 10px;
-          max-height: 87vh;
+          max-height: 80vh;
           overflow-y: scroll;
           position: relative;
           
@@ -156,7 +167,7 @@
             border: 0px;
             width: 100%;
             height: 100%;
-            max-height: 87vh;
+            max-height: 80vh;
             padding: 20px;
             padding-left:40px;
           "
@@ -164,7 +175,39 @@
         </latex-js>
       </div>
     </div>
+
+    <!-- dark edited from here -->
+
+    <div style="display: none" id="logBox">
+
+      <div style="border: 2px solid #000;
+      float: left;
+      width: 100%;
+      height: 20vh;
+      margin: 10px;
+      overflow: hidden; overflow-y: scroll" >
+        <ul id="messages" >
+        <li>Started Logging......</li>
+        </ul>
+      </div>
+
+    </div>
+    <!-- dark edited to here -->
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="../editor.js"></script>
+    <!--dark edits-->
+    <script >
+      function toggleLog() {
+        
+        var contentId = document.getElementById("logBox");
+        var logButton = document.getElementById("logButton");
+       
+        contentId.style.display == "flex" ? contentId.style.display = "none" : contentId.style.display = "flex"; 
+        logButton.innerHTML == "Hide Log" ? logButton.innerHTML = "Show Log" : logButton.innerHTML = "Hide Log"; 
+      }
+      </script>
+      <!--dark edits-->
+
   </body>
 </html>

@@ -61,6 +61,13 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg,roomId) => {
         console.log('message: ' + msg); 
         io.to(roomId).emit('chat message', msg);
+        //dark edited
+        let today = new Date();
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let editmsg= time +" :-  Content edited by Blah";
+        io.to(roomId).emit('new edit',editmsg);
+        
+        //dark edit
       });
 
     socket.on('disconnect', (roomId) => {
