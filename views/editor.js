@@ -9,7 +9,7 @@ generator = latexjs.parse(editor.value, { generator: generator })
 
 var socket = io('/');
 
-socket.emit('join-room',roomId)
+socket.emit('join-room',roomId, nickname)
 
 socket.on('user-connected',(userId)=>{
     console.log('User joined : ',userId)
