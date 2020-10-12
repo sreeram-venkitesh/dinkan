@@ -69,15 +69,17 @@
         </header>
         <section class="modal-card-body">
           <!-- Content ... -->
-          <div style="width:fit-content; padding:10px; margin:0 auto;">
+          <div style="border:1px solid #333; width:fit-content; padding:20px; text-align: center; margin:0 auto;">
             <form action="/" method="POST">
-                <button class="button is-warning" type="submit" style="font-size: larger;">Create a room</button>
-                <button class="button is-warning" type="submit" style="font-size: larger;">Join a room</button>
+                <input class="input" type="text" name="uname" id="uname" style="width: fit-content; font-size:larger;" placeholder="Enter Name"><br><br>
+                <button class="button is-primary" type="submit" style="font-size: larger;">Create Room</button>
             </form>
-          </div><br>
+          </div><br><h2><strong><center>OR</center></strong></h2><br>
+
           <div style="border:1px solid #333; width:fit-content; padding:20px; text-align: center; margin:0 auto;">
               <form action="/join" method="POST">
                   <input class="input" type="text" name="code" id="code" style="width: fit-content; font-size:larger;" placeholder="Enter Code"><br><br>
+                  <input class="input" type="text" name="uname" id="uname" style="width: fit-content; font-size:larger;" placeholder="Enter Name"><br><br>
                   <button class="button is-primary" type="submit" style="font-size: larger;">Join room</button>
               </form>
           </div>
