@@ -28,13 +28,12 @@ app.get('/about',(req,res)=>{
 
 app.post('/',(req,res)=>{
     res.redirect(`/editor/${nanoid()}`)
-    console.log(req.body.nickname); //console printing of input...dark test
+     
 })
 
 app.post('/join',(req,res)=>{
     res.redirect(`/editor/${req.body.code}`)
-    console.log(req.body.uname);
-    console.log(req.body.code); //console printing of input...dark test
+
 })
 
 // app.get('/editor',(req,res)=>{
@@ -59,12 +58,12 @@ io.on('connection', (socket) => {
         }
         currentRoomId = roomId;  //dark added this
         currentNickname=nickname;  //dark added this
-        console.log(numClients)
         io.to(roomId).emit('new peer',numClients[roomId])
         socket.join(roomId)
         let editmsg="-: "+nickname +" joined the room"; //test
         io.to(roomId).emit('new edit',editmsg); //test
         socket.to(roomId).broadcast.emit('user-connected', userId)
+        io.to(roomId).emit('count view',numClients[roomId] )
     })
 
     socket.on('chat message', (msg,roomId,nickname) => {
@@ -79,10 +78,11 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', (roomId ,nickname) => {
         numClients[currentRoomId]--;
+        let online=numClients[currentRoomId];
         io.to(currentRoomId).emit('new peer',numClients[currentRoomId])
         let editmsg=":- "+currentNickname +" left the room"; //test
         io.to(currentRoomId).emit('new edit',editmsg); //test
-        console.log('user disconnected');
+        io.to(currentRoomId).emit('count view',online);
     });   
 });
 
