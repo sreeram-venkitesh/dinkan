@@ -28,10 +28,13 @@ app.get('/about',(req,res)=>{
 
 app.post('/',(req,res)=>{
     res.redirect(`/editor/${nanoid()}`)
+    console.log(req.body.nickname); //console printing of input...dark test
 })
 
 app.post('/join',(req,res)=>{
     res.redirect(`/editor/${req.body.code}`)
+    console.log(req.body.uname);
+    console.log(req.body.code); //console printing of input...dark test
 })
 
 // app.get('/editor',(req,res)=>{
@@ -58,13 +61,11 @@ io.on('connection', (socket) => {
         socket.to(roomId).broadcast.emit('user-connected', userId)
     })
 
-    socket.on('chat message', (msg,roomId) => {
-        console.log('message: ' + msg); 
+    socket.on('chat message', (msg,roomId,nickname) => {
         io.to(roomId).emit('chat message', msg);
         //dark edited
-        let today = new Date();
-        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        let editmsg= time +" :-  Content edited by Blah";
+        
+        let editmsg= " :-  Last edited by " +nickname;
         io.to(roomId).emit('new edit',editmsg);
         
         //dark edit

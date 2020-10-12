@@ -69,16 +69,18 @@
         </header>
         <section class="modal-card-body">
           <!-- Content ... -->
-          <div style="width:fit-content; padding:10px; margin:0 auto;">
+          <div style="border:1px solid #333; width:fit-content; padding:20px; text-align: center; margin:0 auto;">
             <form action="/" method="POST">
-                <button class="button is-warning" type="submit" style="font-size: larger;">Create a room</button>
-                <button class="button is-warning" type="submit" style="font-size: larger;">Join a room</button>
+                <input class="input" type="text" name="nickname" id="nickname" style="width: fit-content; font-size:larger;" placeholder="Enter Name"><br><br>
+                <button class="button is-primary" type="submit" style="font-size: larger;" id="createButton">Create Room</button>
             </form>
-          </div><br>
+          </div><br><h2><strong><center>OR</center></strong></h2><br>
+
           <div style="border:1px solid #333; width:fit-content; padding:20px; text-align: center; margin:0 auto;">
               <form action="/join" method="POST">
                   <input class="input" type="text" name="code" id="code" style="width: fit-content; font-size:larger;" placeholder="Enter Code"><br><br>
-                  <button class="button is-primary" type="submit" style="font-size: larger;">Join room</button>
+                  <input class="input" type="text" name="uname" id="uname" style="width: fit-content; font-size:larger;" placeholder="Enter Name"><br><br>
+                  <button class="button is-primary" type="submit" style="font-size: larger;" id="joinButton">Join room</button>
               </form>
           </div>
         </section>
@@ -93,12 +95,32 @@
       <img src="/dinkan.jpg" width="1000px" height="auto" />
       <h1 class="subtitle is-1">The 21st century LaTeX editor</h1>
     </div>
-
+    <!--dark test edit-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--dark test edit-->
+    
     <script>
       const startButton = document.getElementById('startButton');
       const modal = document.getElementById('modal')
       const modalClose = document.getElementById('modalClose')
+      document.getElementById("createButton").onclick = function() {createFunction()};
+      document.getElementById("joinButton").onclick = function() {joinFunction()};
+
+      function createFunction() {
+      nickname = document.getElementById("nickname").value;
+      console.log("it works");
+      console.log(nickname);
+      sessionStorage.setItem("nickname", nickname);
+    }
+    function joinFunction() {
+      uname = document.getElementById("uname").value;
+      console.log("it works");
+      console.log(uname);
+      sessionStorage.setItem("nickname", uname);
+    }
+
       
+
       startButton.addEventListener('click',()=>{
         modal.className = "modal is-active"
       })
