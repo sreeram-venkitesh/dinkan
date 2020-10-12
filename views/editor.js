@@ -1,6 +1,7 @@
 const editor = document.getElementById('editor');
 const latex = document.getElementById('latex');
 const messageElement = document.getElementById('messages');
+const nickname = sessionStorage.getItem("nickname"); //nickname to here from index.ejs 
 
 var generator = new latexjs.HtmlGenerator({ hyphenate: false })
 
@@ -80,7 +81,7 @@ editor.addEventListener('keystopped', ()=>{
 });
 
 editor.addEventListener('keyup',()=>{
-    socket.emit('chat message', editor.value, roomId);
+    socket.emit('chat message', editor.value, roomId ,nickname);
     return false;
 });
 
@@ -102,7 +103,12 @@ socket.on('new peer', (number)=>{
 
 socket.on('new edit', (msg) => {
     var newLog = document.createElement("LI"); 
-    var textnode = document.createTextNode(msg);
+
+    let today = new Date();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let editmsg= time+msg;
+
+    var textnode = document.createTextNode(editmsg);
     newLog.appendChild(textnode);
     //messageElement.appendChild(newLog);
     messageElement.insertBefore(newLog, messageElement.childNodes[0]);
