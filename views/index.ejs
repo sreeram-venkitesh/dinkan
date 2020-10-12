@@ -105,18 +105,28 @@
       const modalClose = document.getElementById('modalClose')
       document.getElementById("createButton").onclick = function() {createFunction()};
       document.getElementById("joinButton").onclick = function() {joinFunction()};
-
       function createFunction() {
       nickname = document.getElementById("nickname").value;
+      if(nickname=="")
+      {
+        nickname="nameless idiot";
+      }
       console.log("it works");
       console.log(nickname);
       sessionStorage.setItem("nickname", nickname);
+      document.getElementById("nickname").value="";
     }
     function joinFunction() {
       uname = document.getElementById("uname").value;
+      if(name=="")
+      {
+        nickname="nameless idiot";
+      }
       console.log("it works");
       console.log(uname);
       sessionStorage.setItem("nickname", uname);
+      document.getElementById("uname").value="";
+      
     }
 
       

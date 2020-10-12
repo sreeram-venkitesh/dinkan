@@ -28,13 +28,12 @@ app.get('/about',(req,res)=>{
 
 app.post('/',(req,res)=>{
     res.redirect(`/editor/${nanoid()}`)
-    console.log(req.body.nickname); //console printing of input...dark test
+     
 })
 
 app.post('/join',(req,res)=>{
     res.redirect(`/editor/${req.body.code}`)
-    console.log(req.body.uname);
-    console.log(req.body.code); //console printing of input...dark test
+
 })
 
 // app.get('/editor',(req,res)=>{
@@ -48,17 +47,23 @@ app.get('/editor/:room',(req,res)=>{
 numClients = {}
 
 io.on('connection', (socket) => {
-
-    socket.on('join-room',(roomId,userId)=>{
+    
+    var currentRoomId;  //dark added this
+    var currentNickname; //dark added this
+    socket.on('join-room',(roomId,nickname,userId)=>{
         if (numClients[roomId] === undefined) {
             numClients[roomId] = 1;
         } else {
             numClients[roomId] = numClients[roomId]+1;
         }
-        console.log(numClients)
+        currentRoomId = roomId;  //dark added this
+        currentNickname=nickname;  //dark added this
         io.to(roomId).emit('new peer',numClients[roomId])
         socket.join(roomId)
+        let editmsg="-: "+nickname +" joined the room"; //test
+        io.to(roomId).emit('new edit',editmsg); //test
         socket.to(roomId).broadcast.emit('user-connected', userId)
+        io.to(roomId).emit('count view',numClients[roomId] )
     })
 
     socket.on('chat message', (msg,roomId,nickname) => {
@@ -71,10 +76,13 @@ io.on('connection', (socket) => {
         //dark edit
       });
 
-    socket.on('disconnect', (roomId) => {
-        numClients[roomId]--;
-        io.to(roomId).emit('new peer',numClients[roomId])
-        console.log('user disconnected');
+    socket.on('disconnect', (roomId ,nickname) => {
+        numClients[currentRoomId]--;
+        let online=numClients[currentRoomId];
+        io.to(currentRoomId).emit('new peer',numClients[currentRoomId])
+        let editmsg=":- "+currentNickname +" left the room"; //test
+        io.to(currentRoomId).emit('new edit',editmsg); //test
+        io.to(currentRoomId).emit('count view',online);
     });   
 });
 

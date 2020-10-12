@@ -3,13 +3,14 @@ const latex = document.getElementById('latex');
 const messageElement = document.getElementById('messages');
 const nickname = sessionStorage.getItem("nickname"); //nickname to here from index.ejs 
 
+
 var generator = new latexjs.HtmlGenerator({ hyphenate: false })
 
 generator = latexjs.parse(editor.value, { generator: generator })
 
 var socket = io('/');
 
-socket.emit('join-room',roomId)
+socket.emit('join-room',roomId, nickname)
 
 socket.on('user-connected',(userId)=>{
     console.log('User joined : ',userId)
@@ -110,8 +111,13 @@ socket.on('new edit', (msg) => {
 
     var textnode = document.createTextNode(editmsg);
     newLog.appendChild(textnode);
-    //messageElement.appendChild(newLog);
     messageElement.insertBefore(newLog, messageElement.childNodes[0]);
+    
+  })
+
+  socket.on('count view', (msg) => {
+    let onlinecount=  "Online: "+msg;
+    document.getElementById('countView').innerHTML= onlinecount;
     
   })
 
