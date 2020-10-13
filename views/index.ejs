@@ -50,10 +50,10 @@
             <div class="buttons">
               <a
                 class="button is-warning"
-                style="font-size: 25px; padding: 10px; height: fit-content"
+                style="font-size: 25px; padding: 10px; height: fit-content ;"
                 id="startButton"
               >
-                <strong>Start</strong>
+                <strong>  Start  </strong>
               </a>
             </div>
           </div>
@@ -111,8 +111,6 @@
       {
         nickname="nameless idiot";
       }
-      console.log("it works");
-      console.log(nickname);
       sessionStorage.setItem("nickname", nickname);
       document.getElementById("nickname").value="";
     }
@@ -122,14 +120,11 @@
       {
         nickname="nameless idiot";
       }
-      console.log("it works");
-      console.log(uname);
       sessionStorage.setItem("nickname", uname);
       document.getElementById("uname").value="";
       
     }
 
-      
 
       startButton.addEventListener('click',()=>{
         modal.className = "modal is-active"

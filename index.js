@@ -70,7 +70,7 @@ io.on('connection', (socket) => {
         io.to(roomId).emit('chat message', msg);
         //dark edited
         
-        let editmsg= " :-  Last edited by " +nickname;
+        let editmsg= " :-  Edited by " +nickname;
         io.to(roomId).emit('new edit',editmsg);
         
         //dark edit
