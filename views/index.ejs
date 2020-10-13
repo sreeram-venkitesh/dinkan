@@ -47,14 +47,15 @@
 
         <div class="navbar-end">
           <div class="navbar-item">
+            
             <div class="buttons">
               <a
-                class="button is-warning"
-                style="font-size: 25px; padding: 10px; height: fit-content"
-                id="startButton"
-              >
-                <strong>Start</strong>
-              </a>
+              id="startButton"
+              class="button is-warning"
+              style="font-size: 25px; padding: 10px; height: fit-content"
+            >
+              <strong>Start</strong>
+            </a>
             </div>
           </div>
         </div>
@@ -111,8 +112,6 @@
       {
         nickname="nameless idiot";
       }
-      console.log("it works");
-      console.log(nickname);
       sessionStorage.setItem("nickname", nickname);
       document.getElementById("nickname").value="";
     }
@@ -122,14 +121,11 @@
       {
         nickname="nameless idiot";
       }
-      console.log("it works");
-      console.log(uname);
       sessionStorage.setItem("nickname", uname);
       document.getElementById("uname").value="";
       
     }
 
-      
 
       startButton.addEventListener('click',()=>{
         modal.className = "modal is-active"
